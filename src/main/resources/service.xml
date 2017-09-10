@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans">
+
+    <import resource="model.xml"/>
+
+    <bean class="Service.UserService" name="userService"/>
+    <bean class="Service.EventService" name="eventService"/>
+    <bean class="Service.BookingService" name="bookingService"/>
+    <bean class="Service.AuditoriumService" name="auditoriumService"/>
+
+
+
+
+
+
+
+</beans>

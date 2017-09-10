@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+ 		http://www.springframework.org/schema/beans
+ 		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+
+    <bean class="Model.User" name="user">
+        <constructor-arg name="id" value="${user.id}"/>
+        <constructor-arg name="name" value="${user.name}" type="java.lang.String"/>
+    </bean>
+
+    <!-- Called static method -->
+    <bean class="java.text.DateFormat" factory-method="getDateTimeInstance" name="dateFormat"/>
+
+    <bean class="java.util.Date" name="date"/>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:model.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean class="Model.Event" name="event" scope="prototype">
+
+        <constructor-arg index="0" value="${event.name}"/>
+        <constructor-arg index="1" value="${event.id}"/>
+        <constructor-arg index="2" value="${event.baseprice}"/>
+        <constructor-arg index="3" value="${event.rating}"/>
+        <constructor-arg index="4" ref="date"/>
+        <constructor-arg index="5" ref="dateFormat"/>
+    </bean>
+
+    <bean class="Model.Ticket" name="ticket" scope="prototype">
+        <constructor-arg index="0" ref="event"/>
+        <constructor-arg index="1" ref="date"/>
+        <constructor-arg index="2" value="${ticket.seats}"/>
+        <constructor-arg index="3" ref="user"/>
+    </bean>
+
+    <bean class="Model.Auditorium" name="auditorium">
+        <constructor-arg index="0" value="${auditorium.name}"/>
+        <constructor-arg index="1" value="${ticket.seats}"/>
+        <constructor-arg index="2" value="${auditorium.vipSeats}"/>
+    </bean>
+
+</beans>
+
+
+
+
