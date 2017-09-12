@@ -1,14 +1,14 @@
 package Service;
 
-import Model.Event;
-import Model.Ticket;
-import Model.User;
+import Entity.Event;
+import Entity.Ticket;
+import Entity.User;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class BookingService {
+public class BookingService implements Service<Ticket>{
 
     List<Ticket> tickets;
 
@@ -18,8 +18,8 @@ public class BookingService {
 
     //возвращает общую стоимость всех билетов на указанное событие в определенные даты и время для указанных мест.
     int getTicketsPrice(Event event, Date dateTime, User user, int seats){
-        //i don't know which text i can write this scope
-
+        tickets.stream().filter(event -> event.getDateTime().equals(dateTime)
+                && event.getUser().equals(user) && event.getSeat() == seats).;
     }
 
     void bookTicket(Ticket ticket){
@@ -34,6 +34,31 @@ public class BookingService {
                 return ticket;
             }
         }
+        return null;
+    }
+
+    @Override
+    public void save(Ticket ticket) {
+
+    }
+
+    @Override
+    public void remove(Ticket ticket) {
+
+    }
+
+    @Override
+    public List<Ticket> getAll() {
+        return null;
+    }
+
+    @Override
+    public Ticket getByName(String name) {
+        return null;
+    }
+
+    @Override
+    public Ticket getById(int id) {
         return null;
     }
 }

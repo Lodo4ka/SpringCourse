@@ -1,14 +1,19 @@
 package Service;
 
 
+import java.util.List;
 
-public interface Service {
+public interface Service<T> {
 
-    <T>T getAll();
+    void save(T t);
 
-    <T> T getByName(String name);
+    void remove(T t);
 
-    default <T> T getById(int id) {
+    List<T> getAll();
+
+    T getByName(String name);
+
+    default T getById(int id) {
         return null;
     }
 

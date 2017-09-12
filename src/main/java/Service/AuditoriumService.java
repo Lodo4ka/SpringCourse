@@ -1,11 +1,11 @@
 package Service;
 
-import Model.Auditorium;
+import Entity.Auditorium;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AuditoriumService implements Service {
+public class AuditoriumService implements Service<Auditorium> {
 
     List<Auditorium> auditoriums;
 

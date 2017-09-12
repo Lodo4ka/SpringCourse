@@ -1,8 +1,8 @@
 package DAO;
 
-import Model.Auditorium;
-import Model.Event;
-import Model.User;
+import Entity.Auditorium;
+import Entity.Event;
+import Entity.User;
 
 import java.util.List;
 

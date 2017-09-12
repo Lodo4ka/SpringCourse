@@ -1,12 +1,16 @@
 package Service;
 
-import Model.Event;
+import Entity.Event;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
-public class EventService implements Service{
+public class EventService implements Service<Event>{
 
     List<Event> events;
 
@@ -14,6 +18,8 @@ public class EventService implements Service{
         this.events = new ArrayList<>();
     }
 
+
+    @Override
     public void save(Event event) {
         events.add(event);
     }
@@ -50,11 +56,26 @@ public class EventService implements Service{
     }
 
 
-    List<Event> getForDateRange(Date from, Date to){
+    List<LocalDate> getForDateRange(String startDate, String endDate){
+        final LocalDate start = LocalDate.parse(startDate, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        final LocalDate end = LocalDate.parse(endDate, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
 
+       final long days = start.until(end, ChronoUnit.DAYS);
+
+       return LongStream.rangeClosed(0, days)
+               .mapToObj(start::plusDays)
+               .collect(Collectors.toList());
     }
 
-    List<Event> getNextEvents(Date to){
-        
+    List<LocalDate> getNextEvents(String endDate){
+
+        final LocalDate end = LocalDate.parse(endDate, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+
+        LocalDate now = LocalDate.now();
+        final long days = now.until(end, ChronoUnit.DAYS);
+
+        return LongStream.rangeClosed(0, days)
+                .mapToObj(now::plusDays)
+                .collect(Collectors.toList());
     }
 }

@@ -1,11 +1,11 @@
 package Service;
 
-import Model.User;
+import Entity.User;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class UserService implements Service {
+public class UserService implements Service<User> {
 
     private List<User> users;
 

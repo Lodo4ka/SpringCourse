@@ -1,8 +1,7 @@
-package Model;
+package Entity;
 
 import java.text.DateFormat;
 import java.util.Date;
-import java.util.List;
 
 public class Event {
 
@@ -13,8 +12,27 @@ public class Event {
     Date date;
     DateFormat df;
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public Event(String name, int id, int basePrice,String rating, Date date, DateFormat df) {
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setBasePrice(int basePrice) {
+        this.basePrice = basePrice;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
+    public void setDf(DateFormat df) {
+        this.df = df;
+    }
+
+    public Event(String name, int id, int basePrice, String rating, Date date, DateFormat df) {
         this.name = name;
         this.id = id;
         this.basePrice = basePrice;

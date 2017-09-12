@@ -1,9 +1,7 @@
-import Model.User;
+import Entity.User;
 import Service.Service;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import java.util.Map;
 
 public class Application {
 
@@ -19,4 +17,3 @@ public class Application {
         ctx.getBean("");
     }
 }
-/////
