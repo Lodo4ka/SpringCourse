@@ -1,19 +1,18 @@
+import Entity.Event;
 import Entity.User;
-import Service.Service;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class Application {
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-    private User user;
-    private Service service;
+public class Application {
 
 
     public static void main(String[] args) {
 
         ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
         ctx.registerShutdownHook();
-
-        ctx.getBean("");
     }
 }

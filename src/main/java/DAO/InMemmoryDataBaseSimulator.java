@@ -4,38 +4,24 @@ import Entity.Auditorium;
 import Entity.Event;
 import Entity.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class InMemmoryDataBaseSimulator {
 
-    private List<User> users;
-    private List<Event> events;
-    private List<Auditorium> auditoriums;
+    private static List<User> users = new ArrayList<>();
+    private static List<Event> events= new ArrayList<>();;
+    private static List<Auditorium> auditoriums= new ArrayList<>();;
 
-    public List<User> getClient() {
+    public static List<User> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
-
-    public List<Event> getEvents() {
+    public static List<Event> getEvents() {
         return events;
     }
 
-    public void setEvents(List<Event> events) {
-        this.events = events;
-    }
-
-    public List<Auditorium> getAuditoriums() {
+    public static List<Auditorium> getAuditoriums() {
         return auditoriums;
     }
-
-    public void setAuditoriums(List<Auditorium> auditoriums) {
-        this.auditoriums = auditoriums;
-    }
-
-
-    
 }

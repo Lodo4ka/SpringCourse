@@ -1,35 +1,38 @@
 package Entity;
 
+import java.util.List;
+
 public class Auditorium {
 
     String name;
-    int numberOfSeats;
-    int vipSeats;
+    private List<AuditoriumSeat> seats;
 
-    public Auditorium(String name, int numberOfSeats, int vipSeats) {
+    public Auditorium(String name, List<AuditoriumSeat> seats) {
         this.name = name;
-        this.numberOfSeats = numberOfSeats;
-        this.vipSeats = vipSeats;
+        this.seats = seats;
     }
 
     public String getName() {
         return name;
     }
 
-    public int getNumberOfSeats() {
-        return numberOfSeats;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getVipSeats() {
-        return vipSeats;
+    public List<AuditoriumSeat> getSeats() {
+        return seats;
+    }
+
+    public void setSeats(List<AuditoriumSeat> seats) {
+        this.seats = seats;
     }
 
     @Override
     public String toString() {
         return "Auditorium{" +
                 "name='" + name + '\'' +
-                ", numberOfSeats=" + numberOfSeats +
-                ", vipSeats=" + vipSeats +
+                ", seats=" + seats +
                 '}';
     }
 }
