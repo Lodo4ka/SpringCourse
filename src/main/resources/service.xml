@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<beans xmlns="http://www.springframework.org/schema/beans">
-
-    <import resource="entity.xml"/>
-
-    <bean class="Service.UserService" name="userService"/>
-    <bean class="Service.EventService" name="eventService"/>
-    <bean class="Service.BookingService" name="bookingService"/>
-    <bean class="Service.AuditoriumService" name="auditoriumService"/>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-
-
+    <bean class="Service.impl.UserServiceImpl" name="userServiceImpl"/>
+    <bean class="Service.impl.EventServiceImpl" name="eventServiceImpl"/>
+    <bean class="Service.impl.BookingServiceImpl" name="bookingServiceImpl"/>
+    <bean class="Service.impl.AuditoriumServiceImpl" name="auditoriumServiceImpl"/>
 
 
 

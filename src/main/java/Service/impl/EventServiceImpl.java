@@ -5,6 +5,8 @@ import Entity.Event;
 import Service.EventService;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,9 +46,15 @@ public class EventServiceImpl implements EventService {
         final long days = from.until(to, ChronoUnit.DAYS);
 
         //how to transform List<LocalDateTime> to List<Event>
-        return LongStream.rangeClosed(0, days)
-                .mapToObj(from::plusDays)
-                .collect(Collectors.toList());
+        return InMemmoryDataBaseSimulator.getEvents().stream()
+                .filter(event -> {
+                    long start = from.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+                    long end = to.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+
+                    long current = event.getDate().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+
+                    return current >= start && current <= end;
+                }).collect(Collectors.toList());
     }
 
     @Override
