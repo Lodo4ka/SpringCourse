@@ -1,15 +1,13 @@
-package Entity;
+package springcore.entity;
 
-import java.text.DateFormat;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class Event {
 
-    String name;
-    long id;
-    long basePrice;
-    LocalDateTime date;
+    private String name;
+    private long id;
+    private long basePrice;
+    private LocalDateTime date;
 
 
 
@@ -61,5 +59,27 @@ public class Event {
                 ", basePrice=" + basePrice +
                 ", date=" + date +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Event event = (Event) o;
+
+        if (id != event.id) return false;
+        if (basePrice != event.basePrice) return false;
+        if (name != null ? !name.equals(event.name) : event.name != null) return false;
+        return date != null ? date.equals(event.date) : event.date == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (int) (id ^ (id >>> 32));
+        result = 31 * result + (int) (basePrice ^ (basePrice >>> 32));
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        return result;
     }
 }

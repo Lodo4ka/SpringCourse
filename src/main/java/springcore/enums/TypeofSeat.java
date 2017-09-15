@@ -1,4 +1,4 @@
-package Entity.Enum;
+package springcore.enums;
 
 public enum TypeofSeat {
 

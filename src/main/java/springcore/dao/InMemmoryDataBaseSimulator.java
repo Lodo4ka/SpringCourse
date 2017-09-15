@@ -1,8 +1,8 @@
-package DAO;
+package springcore.dao;
 
-import Entity.Auditorium;
-import Entity.Event;
-import Entity.User;
+import springcore.entity.Auditorium;
+import springcore.entity.Event;
+import springcore.entity.User;
 
 import java.util.ArrayList;
 import java.util.List;

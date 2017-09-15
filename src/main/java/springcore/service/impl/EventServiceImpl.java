@@ -1,17 +1,19 @@
-package Service.impl;
+package springcore.service.impl;
 
-import DAO.InMemmoryDataBaseSimulator;
-import Entity.Event;
-import Service.EventService;
+import org.springframework.stereotype.Service;
+import springcore.dao.InMemmoryDataBaseSimulator;
+import springcore.entity.Event;
+import springcore.service.EventService;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
+
+@Service
 public class EventServiceImpl implements EventService {
 
 
@@ -60,11 +62,13 @@ public class EventServiceImpl implements EventService {
     @Override
     public List<Event> getNextEvents(LocalDateTime to) {
 
-        LocalDateTime now = LocalDateTime.now();
 
-        final long days = now.until(to, ChronoUnit.DAYS);
+        return InMemmoryDataBaseSimulator.getEvents().stream().filter(event -> {
+            long now = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+            long end = to.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
 
-        //how to transform List<LocalDateTime> to List<Event>
-        return LongStream.rangeClosed(0, days).mapToObj(now::plusDays).collect(Collectors.toList());
+            long current = event.getDate().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+            return current >= now && current <= end;
+        }).collect(Collectors.toList());
     }
 }

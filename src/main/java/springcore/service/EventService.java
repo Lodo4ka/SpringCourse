@@ -1,15 +1,9 @@
-package Service;
+package springcore.service;
 
-import Entity.Event;
+import springcore.entity.Event;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.LongStream;
 
 public interface EventService{
 

@@ -1,8 +1,7 @@
-package Service;
+package springcore.service;
 
-import Entity.Auditorium;
+import springcore.entity.Auditorium;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface AuditoriumService {

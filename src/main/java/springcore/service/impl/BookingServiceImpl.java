@@ -1,13 +1,17 @@
-package Service.impl;
+package springcore.service.impl;
 
-import Entity.Event;
-import Entity.Ticket;
-import Entity.User;
-import Service.BookingService;
+import org.springframework.stereotype.Service;
+import springcore.entity.Event;
+import springcore.entity.Ticket;
+import springcore.entity.User;
+import springcore.service.BookingService;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
+
+@Service
 public class BookingServiceImpl implements BookingService {
 
     List<Ticket> tickets;

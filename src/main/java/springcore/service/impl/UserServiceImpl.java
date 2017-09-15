@@ -1,11 +1,15 @@
-package Service.impl;
+package springcore.service.impl;
 
-import DAO.InMemmoryDataBaseSimulator;
-import Entity.User;
-import Service.UserService;
+import org.springframework.stereotype.Service;
+import springcore.dao.InMemmoryDataBaseSimulator;
+import springcore.entity.User;
+import springcore.service.UserService;
 
 import java.util.List;
 
+
+
+@Service
 public class UserServiceImpl implements UserService {
 
 

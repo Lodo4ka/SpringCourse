@@ -1,6 +1,7 @@
-package Entity;
+package springcore.entity;
 
-import Entity.Enum.TypeofSeat;
+
+import springcore.enums.TypeofSeat;
 
 public class AuditoriumSeat {
 
@@ -59,5 +60,27 @@ public class AuditoriumSeat {
                 ", row=" + row +
                 ", seat=" + seat +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AuditoriumSeat that = (AuditoriumSeat) o;
+
+        if (number != that.number) return false;
+        if (row != that.row) return false;
+        if (auditorium != null ? !auditorium.equals(that.auditorium) : that.auditorium != null) return false;
+        return seat == that.seat;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = auditorium != null ? auditorium.hashCode() : 0;
+        result = 31 * result + number;
+        result = 31 * result + row;
+        result = 31 * result + (seat != null ? seat.hashCode() : 0);
+        return result;
     }
 }

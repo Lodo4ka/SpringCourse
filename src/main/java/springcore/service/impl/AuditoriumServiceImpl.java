@@ -1,11 +1,14 @@
-package Service.impl;
+package springcore.service.impl;
 
-import DAO.InMemmoryDataBaseSimulator;
-import Entity.Auditorium;
-import Service.AuditoriumService;
+import org.springframework.stereotype.Service;
+import springcore.dao.InMemmoryDataBaseSimulator;
+import springcore.entity.Auditorium;
+import springcore.service.AuditoriumService;
 
 import java.util.List;
 
+
+@Service
 public class AuditoriumServiceImpl implements AuditoriumService {
 
 

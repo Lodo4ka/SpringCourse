@@ -1,12 +1,10 @@
-package Service;
+package springcore.service;
 
-import Entity.Event;
-import Entity.Ticket;
-import Entity.User;
+import springcore.entity.Event;
+import springcore.entity.Ticket;
+import springcore.entity.User;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public interface BookingService{

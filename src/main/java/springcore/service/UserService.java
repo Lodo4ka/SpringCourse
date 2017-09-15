@@ -1,8 +1,7 @@
-package Service;
+package springcore.service;
 
-import Entity.User;
+import springcore.entity.User;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public interface UserService{
