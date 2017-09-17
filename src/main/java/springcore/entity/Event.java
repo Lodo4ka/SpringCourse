@@ -57,7 +57,7 @@ public class Event {
                 "name='" + name + '\'' +
                 ", id=" + id +
                 ", basePrice=" + basePrice +
-                ", date=" + date +
+                ", date= " + date +
                 '}';
     }
 

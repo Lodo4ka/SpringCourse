@@ -4,10 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <bean class="springcore.Service.impl.UserServiceImpl" name="userServiceImpl"/>
-    <bean class="springcore.Service.impl.EventServiceImpl" name="eventServiceImpl"/>
-    <bean class="springcore.Service.impl.BookingServiceImpl" name="bookingServiceImpl"/>
-    <bean class="springcore.Service.impl.AuditoriumServiceImpl" name="auditoriumServiceImpl"/>
+
 
 
 

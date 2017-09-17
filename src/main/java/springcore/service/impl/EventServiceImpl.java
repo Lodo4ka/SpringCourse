@@ -47,7 +47,6 @@ public class EventServiceImpl implements EventService {
 
         final long days = from.until(to, ChronoUnit.DAYS);
 
-        //how to transform List<LocalDateTime> to List<Event>
         return InMemmoryDataBaseSimulator.getEvents().stream()
                 .filter(event -> {
                     long start = from.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
