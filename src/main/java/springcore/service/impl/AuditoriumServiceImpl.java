@@ -6,6 +6,7 @@ import springcore.entity.Auditorium;
 import springcore.service.AuditoriumService;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -19,6 +20,8 @@ public class AuditoriumServiceImpl implements AuditoriumService {
 
     @Override
     public Auditorium getByName(String name) {
-        return  InMemmoryDataBaseSimulator.getAuditoriums().stream().filter(n -> n.getName().equals(name)).findFirst().get();
+        Optional<Auditorium> auditoriumOptional = InMemmoryDataBaseSimulator.getAuditoriums().stream().filter(n -> n.getName().equals(name)).findFirst();
+
+        return auditoriumOptional.orElse(new Auditorium());
     }
 }

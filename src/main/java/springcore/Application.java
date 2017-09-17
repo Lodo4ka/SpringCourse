@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 import springcore.dao.InMemmoryDataBaseSimulator;
 import springcore.entity.Auditorium;
 import springcore.entity.Event;
+import springcore.entity.Ticket;
+import springcore.entity.User;
 import springcore.service.AuditoriumService;
 import springcore.service.BookingService;
 import springcore.service.EventService;
@@ -45,14 +47,19 @@ public class Application {
         Application app = ctx.getBean(Application.class);
 
 
+        app.userService.save(new User(1, "Danila", "Bodrov", "danila@mail.ru", "1234"));
+        app.eventService.save(new Event("Premier", 1, 20, LocalDateTime.now()));
 
+
+        List<Event> events = app.eventService.getAll();
+        List<User> users = app.userService.getAll();
         List<Auditorium> auditoriums = app.auditoriumService.getAll();
-        List<Event> nextEvents = app.eventService.
-                getNextEvents(LocalDateTime.of((2018), Month.APRIL, 20, 13, 30));
 
-
+        users.forEach(System.out::println);
+        System.out.println("----------------------");
+        events.forEach(System.out::println);
+        System.out.println("----------------------");
         auditoriums.forEach(System.out::println);
-        nextEvents.forEach(System.out::println);
     }
 
 }

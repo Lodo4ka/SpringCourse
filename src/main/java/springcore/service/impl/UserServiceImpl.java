@@ -6,7 +6,7 @@ import springcore.entity.User;
 import springcore.service.UserService;
 
 import java.util.List;
-
+import java.util.Optional;
 
 
 @Service
@@ -25,12 +25,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getById(long id) {
-        return InMemmoryDataBaseSimulator.getUsers().stream().filter(u -> u.getId() == id).findFirst().get();
+        Optional<User> userOptional = InMemmoryDataBaseSimulator.getUsers().stream().filter(u -> u.getId() == id).findFirst();
+        return userOptional.orElse(new User());
     }
 
     @Override
     public User getUserByEmail(String email) {
-        return InMemmoryDataBaseSimulator.getUsers().stream().filter(e -> e.getEmail().equals(email)).findFirst().get();
+        Optional<User> userOptional = InMemmoryDataBaseSimulator.getUsers().stream().filter(e -> e.getEmail().equals(email)).findFirst();
+        return userOptional.orElse(new User());
     }
 
     @Override

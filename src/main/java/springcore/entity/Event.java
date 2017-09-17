@@ -19,6 +19,10 @@ public class Event {
         this.date = date;
     }
 
+    public Event() {
+
+    }
+
     public String getName() {
         return name;
     }

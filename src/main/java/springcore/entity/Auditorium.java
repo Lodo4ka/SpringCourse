@@ -8,6 +8,10 @@ public class Auditorium {
         this.name = name;
     }
 
+    public Auditorium() {
+
+    }
+
 
     @Override
     public boolean equals(Object o) {

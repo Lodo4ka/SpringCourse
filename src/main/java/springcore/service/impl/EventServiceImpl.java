@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
@@ -29,12 +30,15 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event getById(long id) {
-        return InMemmoryDataBaseSimulator.getEvents().stream().filter(e -> e.getId() == id).findFirst().get();
+        Optional<Event> eventOptional = InMemmoryDataBaseSimulator.getEvents().stream().filter(e -> e.getId() == id).findFirst();
+        return eventOptional.orElse(new Event());
     }
 
     @Override
     public Event getByName(String name) {
-        return InMemmoryDataBaseSimulator.getEvents().stream().filter(n -> n.getName().equals(name)).findFirst().get();
+        Optional<Event> eventOptional = InMemmoryDataBaseSimulator.getEvents().stream().filter(n -> n.getName().equals(name)).findFirst();
+
+        return eventOptional.orElse(new Event());
     }
 
     @Override
