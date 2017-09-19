@@ -10,7 +10,7 @@ import java.util.Optional;
 
 
 @Service
-public class AuditoriumServiceImpl implements AuditoriumService {
+public class  AuditoriumServiceImpl implements AuditoriumService {
 
 
     @Override

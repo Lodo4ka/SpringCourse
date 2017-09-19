@@ -4,22 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
-import springcore.dao.InMemmoryDataBaseSimulator;
 import springcore.entity.Auditorium;
 import springcore.entity.Event;
-import springcore.entity.Ticket;
 import springcore.entity.User;
 import springcore.service.AuditoriumService;
 import springcore.service.BookingService;
 import springcore.service.EventService;
 import springcore.service.UserService;
-import springcore.service.impl.AuditoriumServiceImpl;
-import springcore.service.impl.BookingServiceImpl;
-import springcore.service.impl.EventServiceImpl;
-import springcore.service.impl.UserServiceImpl;
 
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.List;
 
 @Component
@@ -39,7 +32,6 @@ public class Application {
 
     public static void main(String[] args) {
 
-        InMemmoryDataBaseSimulator inMemmoryDataBaseSimulator = new InMemmoryDataBaseSimulator();
         ConfigurableApplicationContext ctx = new AnnotationConfigApplicationContext("springcore");
         ctx.registerShutdownHook();
         ctx.start();
