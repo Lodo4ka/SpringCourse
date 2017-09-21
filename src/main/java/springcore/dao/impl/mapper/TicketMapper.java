@@ -3,6 +3,7 @@ package springcore.dao.impl.mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
+import springcore.dao.AuditoriumDAO;
 import springcore.dao.AuditoriumSeatDAO;
 import springcore.dao.EventDAO;
 import springcore.dao.UserDAO;
@@ -14,14 +15,18 @@ import java.sql.SQLException;
 
 public class TicketMapper implements RowMapper<Ticket> {
 
-    @Autowired
-    private EventDAO eventDAO;
 
-    @Autowired
-    private UserDAO userDAO;
+    EventDAO eventDAO;
 
-    @Autowired
-    private AuditoriumSeatDAO auditoriumSeatDAO;
+    UserDAO userDAO;
+
+    AuditoriumSeatDAO auditoriumSeatDAO;
+
+    public TicketMapper(EventDAO eventDAO, UserDAO userDAO, AuditoriumSeatDAO auditoriumSeatDAO) {
+        this.eventDAO = eventDAO;
+        this.userDAO = userDAO;
+        this.auditoriumSeatDAO = auditoriumSeatDAO;
+    }
 
     @Override
     public Ticket mapRow(ResultSet rs, int rowNum) throws SQLException {

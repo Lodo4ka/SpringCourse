@@ -15,6 +15,5 @@ public interface TicketDAO {
 
     List<Ticket> getPurchasedTicketsForEvent(Event event);
 
-    long getTicketsPrice(Event event);
 
 }
