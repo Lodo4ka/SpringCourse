@@ -2,13 +2,19 @@ package springcore.dao;
 
 import springcore.entity.User;
 
+import java.util.List;
+
 public interface UserDAO {
 
-    User create(User user);
+    User save(User user);
 
-    User read(User user);
+    User add(User user);
 
-    void update(User user);
+    void delete(int id);
 
-    void delete(User user);
+    User getById(int id);
+
+    User getUserByEmail(String email);
+
+    List<User> getAll();
 }

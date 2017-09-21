@@ -1,7 +1,7 @@
 package springcore.service.impl;
 
 import org.springframework.stereotype.Service;
-import springcore.dao.InMemmoryDataBaseSimulator;
+import springcore.dao.simulator.InMemmoryDataBaseSimulator;
 import springcore.entity.Auditorium;
 import springcore.service.AuditoriumService;
 

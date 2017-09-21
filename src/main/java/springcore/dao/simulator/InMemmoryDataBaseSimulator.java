@@ -1,4 +1,4 @@
-package springcore.dao;
+package springcore.dao.simulator;
 
 import springcore.entity.Auditorium;
 import springcore.entity.Event;
@@ -12,9 +12,6 @@ public class InMemmoryDataBaseSimulator {
     private static List<Event> events = new ArrayList<>();
     private static List<Auditorium> auditoriums = new ArrayList<>();
 
-    public InMemmoryDataBaseSimulator() {
-        auditoriums.add(new Auditorium("Russian"));
-    }
 
     public static List<User> getUsers() {
         return users;

@@ -9,9 +9,6 @@ public class Event {
     private long basePrice;
     private LocalDateTime date;
 
-
-
-
     public Event(String name, long id, long basePrice, LocalDateTime date) {
         this.name = name;
         this.id = id;

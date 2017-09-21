@@ -2,13 +2,24 @@ package springcore.dao;
 
 import springcore.entity.Event;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 public interface EventDAO {
 
-    Event create(Event event);
+    Event save(Event event);
 
-    Event read(Event event);
+    Event add(Event event);
 
-    void update(Event event);
+    void delete(int id);
 
-    void delete(Event event);
+    Event getById(int id);
+
+    List<Event> getall();
+
+    Event getByName(String name);
+
+    List<Event> getForDateTimeRange(LocalDateTime fromDateTime, LocalDateTime toDateTime);
+
+    List<Event> getNextEvents(LocalDateTime dateTime);
 }
