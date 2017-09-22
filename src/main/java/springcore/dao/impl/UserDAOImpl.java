@@ -22,9 +22,9 @@ public class UserDAOImpl implements UserDAO {
 
 
     @Override
-    public User save(User user) {
+    public User refresh(User user) {
         String sqlQuery = "UPDATE users SET firstname = ?, lastname = ?, email = ?, password = ? WHERE id = ?";
-        jdbcTemplate.update(sqlQuery, user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword());
+        jdbcTemplate.update(sqlQuery, user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword(), user.getId());
         return user;
     }
 

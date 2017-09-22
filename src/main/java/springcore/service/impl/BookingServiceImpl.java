@@ -21,8 +21,7 @@ public class BookingServiceImpl implements BookingService {
         return tickets.stream()
                 .filter(ticket -> ticket.getEvent().equals(event) &&
                         ticket.getDateTime().equals(dateTime) &&
-                        ticket.getUser().equals(user) &&
-                        ticket.getSeat() == seats)
+                        ticket.getUser().equals(user))
                 .mapToLong(ticket -> event.getBasePrice()).sum();
     }
 
