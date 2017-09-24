@@ -11,6 +11,7 @@ import static org.junit.Assert.assertTrue;
 
 public class TicketMapperTest extends BaseTest {
 
+
     @Autowired
     private EventDAO eventDAO;
 
@@ -25,6 +26,7 @@ public class TicketMapperTest extends BaseTest {
         ticket.setId(1);
         ticket.setEvent(eventDAO.getById(1));
         ticket.setUser(userDAO.getById(1));
+
         // actual data && given
 //        assertTrue("Ticket id is null", ticket.getId() > 0);
         assertNotNull(ticket);

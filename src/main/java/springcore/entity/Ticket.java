@@ -84,4 +84,5 @@ public class Ticket {
         result = 31 * result + (user != null ? user.hashCode() : 0);
         return result;
     }
+
 }
