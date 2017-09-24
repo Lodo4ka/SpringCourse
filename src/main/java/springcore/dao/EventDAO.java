@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface EventDAO {
 
-    Event save(Event event);
+    Event refresh(Event event);
 
     Event add(Event event);
 

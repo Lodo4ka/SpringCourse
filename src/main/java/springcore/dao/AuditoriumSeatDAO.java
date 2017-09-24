@@ -16,7 +16,7 @@ public interface AuditoriumSeatDAO {
 
     AuditoriumSeat add(AuditoriumSeat auditoriumSeat);
 
-    AuditoriumSeat save(AuditoriumSeat auditoriumSeat);
+    AuditoriumSeat refresh(AuditoriumSeat auditoriumSeat);
 
     AuditoriumSeat getById(int id);
 

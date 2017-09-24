@@ -11,7 +11,9 @@
 
     <properties>
         <spring-context.version>4.3.10.RELEASE</spring-context.version>
-        <spring-jdbc.version>.3.9.RELEASE</spring-jdbc.version>
+        <spring-jdbc.version>4.3.10.RELEASE</spring-jdbc.version>
+        <junit.version>4.12</junit.version>
+        <postgresql.version>9.4.1207-atlassian-hosted</postgresql.version>
     </properties>
 
     <dependencies>
@@ -24,13 +26,13 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
-            <version>4${spring-jdbc.version}</version>
+            <version>${spring-jdbc.version}</version>
         </dependency>
 
         <dependency>
             <groupId>postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>9.4.1207-atlassian-hosted</version>
+            <version>${postgresql.version}</version>
         </dependency>
 
 
@@ -39,6 +41,21 @@
             <artifactId>commons-io</artifactId>
             <version>2.5</version>
         </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring-context.version}</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
 

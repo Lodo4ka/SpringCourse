@@ -14,6 +14,8 @@ import springcore.enums.TypeofSeat;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 
 @Component
@@ -23,32 +25,33 @@ public class AuditoriumSeatDAOImpl implements AuditoriumSeatDAO {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+
     @Autowired
-    private AuditoriumDAO auditoriumDAO;
+    private AuditoriumSeatRowMapper auditoriumSeatRowMapper;
 
     @Override
     public List<AuditoriumSeat> getAll() {
         String sqlQuery = "select * from auditorium_seats";
-        return jdbcTemplate.query(sqlQuery, new AuditoriumSeatRowMapper(auditoriumDAO));
+        return jdbcTemplate.query(sqlQuery, auditoriumSeatRowMapper);
     }
 
     @Override
     public List<AuditoriumSeat> getByAuditorium(Auditorium auditorium) {
         String sqlQuery = "select * from auditorium_seats where auditorium_id = ?";
-        return jdbcTemplate.query(sqlQuery, new Object[]{auditorium.getId()}, new AuditoriumSeatRowMapper(auditoriumDAO));
+        return jdbcTemplate.query(sqlQuery, new Object[]{auditorium.getId()}, auditoriumSeatRowMapper);
     }
 
     @Override
     public List<AuditoriumSeat> getByTypeOfSeat(TypeofSeat typeofSeat) {
         String sqlQuery = "select * from auditorium_seats where seat = ?";
-        return jdbcTemplate.query(sqlQuery, new Object[]{typeofSeat.name()}, new AuditoriumSeatRowMapper(auditoriumDAO));
+        return jdbcTemplate.query(sqlQuery, new Object[]{typeofSeat.name()}, auditoriumSeatRowMapper);
     }
 
     @Override
     public AuditoriumSeat add(AuditoriumSeat auditoriumSeat) {
         String sqlQuery = "INSERT INTO auditorium_seats(number_of_seats, row, auditorium_id, seat) VALUES (?, ?, ?, ?)";
         GeneratedKeyHolder generatedKeyHolder = new GeneratedKeyHolder();
-        jdbcTemplate.update(connection -> {
+        jdbcTemplate.update(connection->{
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, auditoriumSeat.getNumberOfSeats());
             preparedStatement.setInt(2, auditoriumSeat.getRow());
@@ -56,12 +59,14 @@ public class AuditoriumSeatDAOImpl implements AuditoriumSeatDAO {
             preparedStatement.setString(4, auditoriumSeat.getSeat().name());
             return preparedStatement;
         }, generatedKeyHolder);
-        auditoriumSeat.setId(generatedKeyHolder.getKeyList().size() == 0 ? null : (Integer) generatedKeyHolder.getKeyList().get(0).get("id"));
+        Optional<List<Map<String, Object>>> keyList = Optional.ofNullable(generatedKeyHolder.getKeyList());
+        Object id = keyList.map(k->k.iterator().next()).map(n->n.get("id")).orElse(null);
+        auditoriumSeat.setId((long) id);
         return auditoriumSeat;
     }
 
     @Override
-    public AuditoriumSeat save(AuditoriumSeat auditoriumSeat) {
+    public AuditoriumSeat refresh(AuditoriumSeat auditoriumSeat) {
         String sqlquery = "update auditorium_seats set number = ?, seat_row = ?, auditorium_id = ?, seat_type = ? where id = ?";
         jdbcTemplate.update(sqlquery, auditoriumSeat.getNumberOfSeats(), auditoriumSeat.getRow(), auditoriumSeat.getAuditorium().getId(),
                 auditoriumSeat.getSeat().ordinal());
@@ -71,7 +76,7 @@ public class AuditoriumSeatDAOImpl implements AuditoriumSeatDAO {
     @Override
     public AuditoriumSeat getById(int id) {
         String sqlquery = "select * from auditorium_seats where id = ?";
-        List<AuditoriumSeat> auditoriumSeats = jdbcTemplate.query(sqlquery, new Object[]{id}, new AuditoriumSeatRowMapper(auditoriumDAO));
+        List<AuditoriumSeat> auditoriumSeats = jdbcTemplate.query(sqlquery, new Object[]{id}, auditoriumSeatRowMapper);
         return auditoriumSeats.size() > 0 ? auditoriumSeats.get(0) : null;
     }
 

@@ -1,12 +1,14 @@
 package springcore.dao.impl.mapper;
 
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 import springcore.entity.Event;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
+@Component
 public class EventRowMapper implements RowMapper<Event> {
 
     @Override

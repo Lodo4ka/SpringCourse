@@ -21,10 +21,10 @@ public class TicketDAOImpl implements TicketDAO {
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    private TicketMapper mapper;
+    private TicketMapper ticketMapper;
 
     @Override
-    public Ticket save(Ticket ticket) {
+    public Ticket refresh(Ticket ticket) {
         String sqlQuery = "UPDATE tickets SET event_id = ?, date_time = ?, user_id = ? WHERE id = ?";
         jdbcTemplate.update(sqlQuery, ticket.getEvent().getId(), ticket.getDateTime(), ticket.getUser().getId());
         return ticket;
@@ -46,7 +46,6 @@ public class TicketDAOImpl implements TicketDAO {
 
         Object id = keyList.map(item -> item.iterator().next()).map(n -> n.get("id")).orElse(null);
         ticket.setId((long) id);
-
         return ticket;
     }
 
@@ -60,6 +59,6 @@ public class TicketDAOImpl implements TicketDAO {
     @Override
     public List<Ticket> getPurchasedTicketsForEvent(Event event) {
         String sqlquery = "SELECT * FROM tickets WHERE event_id = ?";
-        return jdbcTemplate.query(sqlquery, new Object[]{event.getId()}, mapper);
+        return jdbcTemplate.query(sqlquery, new Object[]{event.getId()}, ticketMapper);
     }
 }

@@ -11,6 +11,8 @@ import springcore.entity.User;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 
 @Component
@@ -20,11 +22,14 @@ public class UserDAOImpl implements UserDAO {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    private UserRowMapper userRowMapper;
+
 
     @Override
     public User refresh(User user) {
         String sqlQuery = "UPDATE users SET firstname = ?, lastname = ?, email = ?, password = ? WHERE id = ?";
-        jdbcTemplate.update(sqlQuery, user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword(), user.getId());
+        jdbcTemplate.update(sqlQuery,user.getId(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword());
         return user;
     }
 
@@ -40,7 +45,9 @@ public class UserDAOImpl implements UserDAO {
             preparedStatement.setString(4, user.getPassword());
             return preparedStatement;
         }, generatedKeyHolder);
-        user.setId(generatedKeyHolder.getKeyList().size() == 0 ? null : (Integer)generatedKeyHolder.getKeyList().get(0).get("id"));
+        Optional<List<Map<String, Object>>> keyList = Optional.ofNullable(generatedKeyHolder.getKeyList());
+        Object id = keyList.map(i->i.iterator().next()).map(n->n.get("id")).orElse(null);
+        user.setId((long) id);
         return user;
     }
 
@@ -53,20 +60,20 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public User getById(int id) {
         String sqlQuery = "select from users where id = ?";
-        List<User> users = jdbcTemplate.query(sqlQuery, new Object[]{id}, new UserRowMapper());
+        List<User> users = jdbcTemplate.query(sqlQuery, new Object[]{id}, userRowMapper);
         return users.size()> 0 ? users.get(0) : null;
     }
 
     @Override
     public User getUserByEmail(String email) {
         String sqlQuery = "select * from users where email = ?";
-        List<User> users = jdbcTemplate.query(sqlQuery, new Object[]{email}, new UserRowMapper());
+        List<User> users = jdbcTemplate.query(sqlQuery, new Object[]{email}, userRowMapper);
         return users.size() > 0 ? users.get(0) : null;
     }
 
     @Override
     public List<User> getAll() {
         String sqlQuery = "select * from users";
-        return jdbcTemplate.query(sqlQuery, new UserRowMapper());
+        return jdbcTemplate.query(sqlQuery, userRowMapper);
     }
 }

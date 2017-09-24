@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface TicketDAO {
 
-    Ticket save(Ticket ticket);
+    Ticket refresh(Ticket ticket);
 
     Ticket add(Ticket ticket);
 

@@ -12,6 +12,8 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Component
 public class EventDAOImpl implements EventDAO {
@@ -19,9 +21,11 @@ public class EventDAOImpl implements EventDAO {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    private EventRowMapper eventRowMapper;
 
     @Override
-    public Event save(Event event) {
+    public Event refresh(Event event) {
         String sqlQuery = "UPDATE events SET name = ?, baseprice = ?, date = ? WHERE id = ?";
         jdbcTemplate.update(sqlQuery, event.getName(), event.getBasePrice(), event.getDate());
         return event;
@@ -38,7 +42,9 @@ public class EventDAOImpl implements EventDAO {
             preparedStatement.setTimestamp(3, Timestamp.valueOf(event.getDate()));
             return preparedStatement;
         }, generatedKeyHolder);
-        event.setId(generatedKeyHolder.getKeyList().size() == 0 ? null : (Integer) generatedKeyHolder.getKeyList().get(0).get("id"));
+        Optional<List<Map<String, Object>>> keyList = Optional.ofNullable(generatedKeyHolder.getKeyList());
+        Object id = keyList.map(item -> item.iterator().next()).map(n -> n.get("id")).orElse(null);
+        event.setId((long) id);
         return event;
     }
 
@@ -51,32 +57,32 @@ public class EventDAOImpl implements EventDAO {
     @Override
     public Event getById(int id) {
         String sqlQuery = "SELECT FROM events WHERE id = ?";
-        List<Event> events = jdbcTemplate.query(sqlQuery, new Object[]{id}, new EventRowMapper());
+        List<Event> events = jdbcTemplate.query(sqlQuery, new Object[]{id}, eventRowMapper);
         return events.size() > 0 ? events.get(0) : null;
     }
 
     @Override
     public List<Event> getall() {
         String sqlQuery = "SELECT * FROM events";
-        return jdbcTemplate.query(sqlQuery, new EventRowMapper());
+        return jdbcTemplate.query(sqlQuery, eventRowMapper);
     }
 
     @Override
     public Event getByName(String name) {
         String sqlQuery = "select * from events where name = ?";
-        List<Event> events = jdbcTemplate.query(sqlQuery, new Object[]{name}, new EventRowMapper());
+        List<Event> events = jdbcTemplate.query(sqlQuery, new Object[]{name}, eventRowMapper);
         return events.size()>0 ? events.get(0) : null;
     }
 
     @Override
     public List<Event> getForDateTimeRange(LocalDateTime fromDateTime, LocalDateTime toDateTime) {
         String sqlQuery = "select * from events where date >= ? and date <= ?";
-        return jdbcTemplate.query(sqlQuery, new Object[]{fromDateTime, toDateTime}, new EventRowMapper());
-    }
+        return jdbcTemplate.query(sqlQuery, new Object[]{fromDateTime, toDateTime}, eventRowMapper);
+}
 
     @Override
     public List<Event> getNextEvents(LocalDateTime dateTime) {
         String sqlQuery = "select * from events where date <= ?";
-        return jdbcTemplate.query(sqlQuery, new Object[]{dateTime}, new EventRowMapper());
+        return jdbcTemplate.query(sqlQuery, new Object[]{dateTime}, eventRowMapper);
     }
 }

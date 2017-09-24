@@ -15,11 +15,9 @@ import java.sql.SQLException;
 public class AuditoriumSeatRowMapper implements RowMapper<AuditoriumSeat> {
 
 
-    AuditoriumDAO auditoriumDAO;
+    @Autowired
+    private AuditoriumDAO auditoriumDAO;
 
-    public AuditoriumSeatRowMapper(AuditoriumDAO auditoriumDAO) {
-        this.auditoriumDAO = auditoriumDAO;
-    }
 
     @Override
     public AuditoriumSeat mapRow(ResultSet rs, int rowNum) throws SQLException {
